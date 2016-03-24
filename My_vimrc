@@ -1,7 +1,7 @@
 filetype on
 set shortmess=atI "去掉欢迎界面（帮助乌干达儿童。。。）
 colorscheme  molokai     "配色方案 
-set guifont=Consolas:h14     "字体与字号
+set guifont=Liberation\Mono\ 11     "字体与字号
 set tabstop=4                " 设置tab键的宽度
 set shiftwidth=4             " 换行时行间交错使用4个空格
 "set autoindent               " 自动对齐
@@ -30,6 +30,9 @@ filetype indent on           " 针对不同的文件类型采用不同的缩进�
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
 
+set ts=4 
+set expandtab
+
 " 映射全选+复制 ctrl+a  
 map <C-A> ggVG  
 map! <C-A> <Esc>ggVGY  
@@ -40,9 +43,9 @@ map <C-v> "+p
 
 map <F5> :call CR()<CR>
 func! CR()
-exec "w"
-exec "!g++ -O2 -g  % -o %<"
-exec "! %<"
+exec "w"  
+exec "!g++ -Wall % -o %<"  
+exec "! ./%<"  
 endfunc
 
 "C,C++的调试  
@@ -70,18 +73,26 @@ let l = l + 1 | call setline(l,'#include <math.h>')
 let l = l + 1 | call setline(l,'#include <stdlib.h>')
 let l = l + 1 | call setline(l,'#include <time.h>')
 let l = l + 1 | call setline(l,'using namespace std;')
+let l = l + 1 | call setline(l,'#define LL long long')
+let l = l + 1 | call setline(l,'#define Lowbit(x) ((x)&(-x))')
+let l = l + 1 | call setline(l,'#define lson l, mid, rt << 1')
+let l = l + 1 | call setline(l,'#define rson mid + 1, r, rt << 1|1')
+let l = l + 1 | call setline(l,'#define MP(a, b) make_pair(a, b)')
 let l = l + 1 | call setline(l,'const int INF = 0x3f3f3f3f;')
-let l = l + 1 | call setline(l,'const double eps = 1e-4;')
+let l = l + 1 | call setline(l,'const int Mod = 1000000007;')
+let l = l + 1 | call setline(l,'const int maxn = 1e5 + 10;')
+let l = l + 1 | call setline(l,'const double eps = 1e-8;')
+let l = l + 1 | call setline(l,'const double PI = acos(-1.0);')
+let l = l + 1 | call setline(l,'typedef pair<int, int> pii;')
 let l = l + 1 | call setline(l,'')
 let l = l + 1 | call setline(l,'int main()')
 let l = l + 1 | call setline(l,'{')
-let l = l + 1 | call setline(l,'    //freopen("H:\\in.txt","r",stdin);')
-let l = l + 1 | call setline(l,'    //freopen("H:\\out.txt","w",stdout);')
+let l = l + 1 | call setline(l,'    //freopen("in.txt","r",stdin);')
+let l = l + 1 | call setline(l,'    //freopen("out.txt","w",stdout);')
 let l = l + 1 | call setline(l,'    ')
 let l = l + 1 | call setline(l,'    return 0;')
 let l = l + 1 | call setline(l,'}')
 endfunc
-"gvim 版本为7.3.46
+"ubuntu gnome 15.10
 set guioptions-=T " 隐藏工具栏
 set guioptions-=m " 隐藏菜单栏
-

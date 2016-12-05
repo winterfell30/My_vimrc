@@ -57,7 +57,7 @@ func! Rungdb()
 endfunc  
 
 map <F2> :call SetTitle()<CR>
-func SetTitle()
+func! SetTitle()
 let l = 0
 let l = l + 1 | call setline(l,'#include <stdio.h>')
 let l = l + 1 | call setline(l,'#include <string.h>')
@@ -93,6 +93,6 @@ let l = l + 1 | call setline(l,'    ')
 let l = l + 1 | call setline(l,'    return 0;')
 let l = l + 1 | call setline(l,'}')
 endfunc
-"ubuntu gnome 15.10
+"ubuntu 16.04
 set guioptions-=T " 隐藏工具栏
 set guioptions-=m " 隐藏菜单栏

@@ -1,7 +1,9 @@
 filetype on
 set shortmess=atI "去掉欢迎界面（帮助乌干达儿童。。。）
 colorscheme  monokai     "配色方案 
-set guifont=Liberation\Mono\ 11     "字体与字号
+"set guifont=Liberation\Mono\ 11     "字体与字号
+set guifont=Consolas:h12
+set guifontwide=Microsoft/YaHei:h12
 set tabstop=4                " 设置tab键的宽度
 set shiftwidth=4             " 换行时行间交错使用4个空格
 set softtabstop=4

@@ -1,15 +1,11 @@
 filetype on
 set shortmess=atI "去掉欢迎界面（帮助乌干达儿童。。。）
-colorscheme  molokai     "配色方案 
+colorscheme  monokai     "配色方案 
 set guifont=Liberation\Mono\ 11     "字体与字号
 set tabstop=4                " 设置tab键的宽度
 set shiftwidth=4             " 换行时行间交错使用4个空格
-"set autoindent               " 自动对齐
 set softtabstop=4
 set backspace=indent,eol,start              " 设置退格键可用
-"set cindent shiftwidth=4     " 自动缩进4空格
-"set smartindent              " 智能自动缩进
-"set ai!                      " 设置自动缩进
 set showmatch 
 set number                   " 显示行号
 set mouse=a                  " 启用鼠标
@@ -21,7 +17,6 @@ set nowrapscan               " 搜索到文件两端时不重新搜索
 set nocompatible             " 关闭兼容模式
 set vb t_vb=                 " 关闭提示音
 set hidden                   " 允许在有未保存的修改时切换缓冲区
-"set list                     " 显示Tab符，使用一高亮竖线代替
 set listchars=tab:\|\ ,
 set nobackup
 syntax enable                " 打开语法高亮
@@ -30,69 +25,128 @@ filetype indent on           " 针对不同的文件类型采用不同的缩进�
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
 
+"设置文件检测编码
+set fileencodings=utf-8,gbk,gb2312,ucs-bom,chinese,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+""设置内部编码
+set encoding=utf-8
+"设置新建文件保存编码
+"set fileencoding=utf-8
+
+set termencoding=utf-8
+set fileformats=unix,dos
+
 set ts=4 
 set expandtab
-
-" 映射全选+复制 ctrl+a  
 map <C-A> ggVG  
 map! <C-A> <Esc>ggVGY  
 map <F12> gg=G  
-" 选中状态下 Ctrl+c 复制  
-vmap <C-c> "+y  
-map <C-v> "+p  
 
-map <F5> :call CR()<CR>
-func! CR()
-exec "w"  
-exec "!g++ -Wall % -o %<"  
-exec "! ./%<"  
-endfunc
+"autocmd VimEnter * NERDTree
+map <F2> :NERDTreeToggle<CR>
 
-"C,C++的调试  
-map <F8> :call Rungdb()<CR>  
-func! Rungdb()  
-    exec "w"  
-    exec "!g++ % -g -o %<"  
-    exec "!gdb ./%<"  
-endfunc  
-
-map <F2> :call SetTitle()<CR>
-func! SetTitle()
-let l = 0
-let l = l + 1 | call setline(l,'#include <stdio.h>')
-let l = l + 1 | call setline(l,'#include <string.h>')
-let l = l + 1 | call setline(l,'#include <iostream>')
-let l = l + 1 | call setline(l,'#include <algorithm>')
-let l = l + 1 | call setline(l,'#include <vector>')
-let l = l + 1 | call setline(l,'#include <queue>')
-let l = l + 1 | call setline(l,'#include <stack>')
-let l = l + 1 | call setline(l,'#include <set>')
-let l = l + 1 | call setline(l,'#include <map>')
-let l = l + 1 | call setline(l,'#include <string>')
-let l = l + 1 | call setline(l,'#include <math.h>')
-let l = l + 1 | call setline(l,'#include <stdlib.h>')
-let l = l + 1 | call setline(l,'#include <time.h>')
-let l = l + 1 | call setline(l,'using namespace std;')
-let l = l + 1 | call setline(l,'#define LL long long')
-let l = l + 1 | call setline(l,'#define Lowbit(x) ((x)&(-x))')
-let l = l + 1 | call setline(l,'#define lson l, mid, rt << 1')
-let l = l + 1 | call setline(l,'#define rson mid + 1, r, rt << 1|1')
-let l = l + 1 | call setline(l,'#define MP(a, b) make_pair(a, b)')
-let l = l + 1 | call setline(l,'const int INF = 0x3f3f3f3f;')
-let l = l + 1 | call setline(l,'const int MOD = 1000000007;')
-let l = l + 1 | call setline(l,'const int maxn = 1e5 + 10;')
-let l = l + 1 | call setline(l,'const double eps = 1e-8;')
-let l = l + 1 | call setline(l,'const double PI = acos(-1.0);')
-let l = l + 1 | call setline(l,'typedef pair<int, int> pii;')
-let l = l + 1 | call setline(l,'')
-let l = l + 1 | call setline(l,'int main()')
-let l = l + 1 | call setline(l,'{')
-let l = l + 1 | call setline(l,'    //freopen("in.txt","r",stdin);')
-let l = l + 1 | call setline(l,'    //freopen("out.txt","w",stdout);')
-let l = l + 1 | call setline(l,'    ')
-let l = l + 1 | call setline(l,'    return 0;')
-let l = l + 1 | call setline(l,'}')
-endfunc
-"ubuntu 16.04
 set guioptions-=T " 隐藏工具栏
 set guioptions-=m " 隐藏菜单栏
+
+set rtp+=~/.vim/bundle/Vundle.vim
+"vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'vim-scripts/phd'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'kshenoy/vim-signature'
+Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/indexer.tar.gz'
+Plugin 'vim-scripts/DfrankUtil'
+Plugin 'vim-scripts/vimprj'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'vim-scripts/DrawIt'
+Plugin 'SirVer/ultisnips'
+Plugin 'derekwyatt/vim-protodef'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'lilydjwg/fcitx.vim'
+" 插件列表结束
+call vundle#end()
+	    
+"map <F2> :NERDTree<CR>
+" 没有文件时自动关闭NERDTree
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+	    
+" 当新建 .h .c .hpp .cpp .mk .sh等文件时自动调用SetTitle 函数
+autocmd BufNewFile *.[ch],*.hpp,*.cpp,*.cc,Makefile,*.mk,*.sh exec ":call SetTitle()" 
+
+func! SetComment()
+	call setline(1,"/*================================================================") 
+	call append(line("."),   "*   Copyright (C) Baidu Map Ltd. All rights reserved.")
+	call append(line(".")+1, "*   ") 
+	call append(line(".")+2, "*   文件名称：".expand("%:t")) 
+	call append(line(".")+3, "*   创 建 者：wudonglin@baidu.com")
+	call append(line(".")+4, "*   创建日期：".strftime("%Y年%m月%d日")) 
+	call append(line(".")+5, "*   描    述：") 
+	call append(line(".")+6, "*")
+	call append(line(".")+7, "================================================================*/") 
+	call append(line(".")+8, "")
+	call append(line(".")+9, "")
+	endfunc
+
+
+func! SetComment_sh()
+	call setline(3, "#================================================================") 
+	call setline(4, "#   Copyright (C) ".strftime("%Y")." Baidu Map Ltd. All rights reserved.")
+	call setline(5, "#   ") 
+	call setline(6, "#   文件名称：".expand("%:t")) 
+	call setline(7, "#   创 建 者：wudonglin@baidu.com")
+	call setline(8, "#   创建日期：".strftime("%Y年%m月%d日")) 
+	call setline(9, "#   描    述：") 
+	call setline(10, "#")
+	call setline(11, "#================================================================")
+	call setline(12, "")
+	call setline(13, "")
+	endfunc 
+
+func! SetTitle()
+    if &filetype == 'make' 
+        call setline(1,"") 
+        call setline(2,"")
+        call SetComment_sh()
+    elseif &filetype == 'sh' 
+        call setline(1,"#!/system/bin/sh") 
+        call setline(2,"")
+        call SetComment_sh()
+
+    else
+        call SetComment()
+        if expand("%:e") == 'hpp'
+            call append(line(".")+10, "#ifndef _".toupper(expand("%:t:r"))."_H") 
+            call append(line(".")+11, "#define _".toupper(expand("%:t:r"))."_H") 
+            call append(line(".")+12, "#ifdef __cplusplus") 
+            call append(line(".")+13, "extern \"C\"") 
+            call append(line(".")+14, "{") 
+            call append(line(".")+15, "#endif") 
+            call append(line(".")+16, "") 
+            call append(line(".")+17, "#ifdef __cplusplus") 
+            call append(line(".")+18, "}") 
+            call append(line(".")+19, "#endif") 
+            call append(line(".")+20, "#endif //".toupper(expand("%:t:r"))."_H") 
+
+        elseif expand("%:e") == 'h'
+            call append(line(".")+10, "#ifndef _".toupper(expand("%:t:r"))."_H") 
+            call append(line(".")+11, "#define _".toupper(expand("%:t:r"))."_H") 
+            call append(line(".")+12, "") 
+            call append(line(".")+13, "#endif //".toupper(expand("%:t:r"))."_H") 
+            
+        endif
+    endif
+endfunc
